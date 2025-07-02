@@ -1,16 +1,20 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { data } from "react-router-dom";
 
 export default function Country() {
     // API 통신 "[GET] http://localhost/country"
     // const countryList = [];
     const [countryList, setCountryList] = useState([]);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [totalpages, setTotalpages] = useState(1);
 
     useEffect(() => {
-        fetch("http://localhost/country")
+        fetch("http://localhost/countryList/"+pageNumber)
         .then(function(res){return res.json();})
-        .then(function(data) {setCountryList(data)})
-    }, []); // 무한루프 방지 빈배열을 넣어준다
+        .then(function(data){setCountryList(data.content);
+                            setTotalpages(data.totalpages);}) // date는 객체타입 {} page타입이고, data.content 가 배열
+    }, [pageNumber]); // 무한루프 방지 빈배열을 넣어준다, 단 페이징시 pageNumber값이 변해도 빈 인자값이면 화면이 렌더링때 한번만 useEffect가 실행
+    // 되니깐 빈배열말고 pageNumber를 넣어준다
 
     return (
     <div>
@@ -24,11 +28,14 @@ export default function Country() {
                 countryList.map((c) => (
                     <tr key={c.countryId}>
                         <td>{c.countryId}</td>
+                        {/* <td><Link to="/CountryOne/{c.countryId}">{c.country}</Link></td> */}
                         <td>{c.country}</td>
                     </tr>
                 ))
             }
         </table>
+        {pageNumber > 1 ? <button onClick={()=>{setPageNumber(pageNumber - 1)}}>이전</button> : <span></span>}
+        {pageNumber < totalpages ? <span></span> : <button onClick={()=>{setPageNumber(pageNumber + 1)}}>다음</button>}
     </div>
     )
 }

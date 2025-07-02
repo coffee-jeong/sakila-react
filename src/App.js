@@ -27,6 +27,7 @@ export default function App() {
                 <Routes>
                     <Route path='/' element={<Home />}></Route> {/* 라우터는 -> 컴포넌트를 요청 */}
                     <Route path='/Country' element={<Country />}></Route>
+                    {/*<Route path='/CountryOne/:countryId' element={<CountryOne />}></Route>*/}
                     <Route path='/City' element={<City />}></Route>
                     <Route path='/Address' element={<Address />}></Route>
                     <Route path='/Customer' element={<Customer />}></Route>
