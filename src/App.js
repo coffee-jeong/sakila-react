@@ -1,8 +1,14 @@
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Home from './component/Home';
 import Country from './component/Country';
+import CountryOne from './component/CountryOne';
+import AddCountry from './component/AddCountry';
 import City from './component/City';
+import CityOne from './component/CityOne';
+import AddCity from './component/AddCity';
 import Address from './component/Address';
+import AddressOne from './component/AddressOne.js';
+import AddAddress from './component/AddAddress';
 import Customer from './component/Customer';
 import Store from './component/Store';
 
@@ -26,10 +32,23 @@ export default function App() {
                 {/* content  */}
                 <Routes>
                     <Route path='/' element={<Home />}></Route> {/* 라우터는 -> 컴포넌트를 요청 */}
+
+                    {/* country CRUD */}
                     <Route path='/Country' element={<Country />}></Route>
-                    {/*<Route path='/CountryOne/:countryId' element={<CountryOne />}></Route>*/}
+                    <Route path='/CountryOne/:countryId' element={<CountryOne />}></Route>
+                    <Route path='/AddCountry' element={<AddCountry />}></Route>
+
+                    {/* city CRUD */}
                     <Route path='/City' element={<City />}></Route>
+                    <Route path='/CityOne/:cityId' element={<CityOne />}></Route>
+                    <Route path='/AddCity/:countryId' element={<AddCity />}></Route>
+                    
+                    {/* address CRUD */}
                     <Route path='/Address' element={<Address />}></Route>
+                    <Route path='/AddressOne/:addressId' element={<AddressOne />}></Route>
+                    <Route path='/AddAddress/:cityId' element={<AddAddress />}></Route>
+
+
                     <Route path='/Customer' element={<Customer />}></Route>
                     <Route path='/Store' element={<Store />}></Route>
                 </Routes>
