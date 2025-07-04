@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { data } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Customer() {
 
@@ -27,8 +28,8 @@ export default function Customer() {
             customerList.map((c)=>(
                 <tr key={c.customerId}>
                     <td>{c.customerId}</td>
-                    <td>{c.firstName}</td>
-                    <td>{c.lastName}</td>
+                    <td><Link to={`/CustomerOne/${c.customerId}`}>{c.firstName}</Link></td>
+                    <td><Link to={`/CustomerOne/${c.customerId}`}>{c.lastName}</Link></td>
                 </tr>
             ))
         }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AddCountry() {
-    const [country, setCountry] = useState("");
+    const [country, setCountry] = useState({});
     const navigate = useNavigate();
 
     function addCountry() {

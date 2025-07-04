@@ -1,15 +1,32 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 export default function AddressOne() {
     const {addressId} = useParams();
     const [address, setAddress] = useState({});
+    const navigate = useNavigate();
 
      useEffect(() => {
                 fetch(`http://localhost/addressOne/${addressId}`)
                 .then((res) => {return res.json()})
                 .then((data) => {setAddress(data)});
             }, []);
+        
+    function remove() {
+        if(window.confirm('삭제하시겠습니까?')) {
+            // window.alert('삭제 API통신.')
+            fetch(`http://localhost/address/${addressId}`, {method: 'DELETE'})
+                .then((res) => {
+                    if (res.ok) {
+                        navigate('/Address');
+                    } else {
+                        window.alert('삭제실패');
+                    }
+                })
+        } else {
+            window.alert('삭제를 취소했습니다.')
+        }
+    }
 
     return (
         <div>
@@ -52,8 +69,8 @@ export default function AddressOne() {
                 <td>{address.lastUpdate}</td>
             </tr>
         </table>
-        <button>수정</button>
-        <button>삭제</button>
+        <button onClick={() => {navigate(`/EditAddress/${addressId}`)}}>수정</button>
+        <button onClick={remove}>삭제</button>
             
         </div>
     )
